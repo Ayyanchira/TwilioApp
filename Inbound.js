@@ -31,7 +31,7 @@ if (request.body.Body == "STARTAPP" && studyEnrolled == false){
     var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
     sendMessageWithoutHeader(request.body.From,symptomQuestion);
 }
-if (studyEnrolled == true){
+else if (studyEnrolled == true){
     if(request.body.Body == "0" || request.body.Body == "1" || request.body.Body == "2" || request.body.Body == "3" || request.body.Body == "4" || request.body.Body == "5"){
         if (symptomDescribed == false){
             symptom = request.body.Body

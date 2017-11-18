@@ -53,7 +53,7 @@ if (studyEnrolled == true){
             if (symptomScale == "0"){
                 answer = "You do not have a "+dictionarySymptom[symptom];
             }else{
-                answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom.symptom;
+                answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom[symptom];
             }
             sendMessage(answer,response);
             numberOfLoop = numberOfLoop + 1;

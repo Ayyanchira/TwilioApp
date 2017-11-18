@@ -62,13 +62,14 @@ if (studyEnrolled == true){
             })
             .then((message) =>{
                 numberOfLoop = numberOfLoop + 1;
+                symptomDescribed = false;
+                symptomScaled = false;
                 if (numberOfLoop < 3){
-                    symptomDescribed = false;
-                    symptomScaled = false;
                     var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
                     sendMessage(symptomQuestion,response);
                 }
                 else{
+                    studyEnrolled = false;
                     var greeting = "Thank you and see you soon";
                     sendMessage(greeting,response);
                 } 

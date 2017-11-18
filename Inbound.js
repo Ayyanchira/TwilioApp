@@ -36,14 +36,22 @@ if (studyEnrolled == true){
         if (symptomDescribed == false){
             symptom = request.body.Body
             symptomDescribed = true;
-            scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictionarySymptom[symptom] +" in the last 24 hours?"
-            sendMessage(scaleMessage,response);
+            if (symptom == "0"){
+                greetingMessage = "Thank you and we will check with you later.";
+                studyEnrolled = false;
+                symptomDescribed = false;
+                sendMessage(greetingMessage,response);
+            }else{
+                scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictionarySymptom[symptom] +" in the last 24 hours?"
+                sendMessage(scaleMessage,response);
+            }
+            
         }
         else if (symptomScaled == false){
             symptomScale = request.body.Body;
             symptomScaled = true;
             if (symptomScale == "0"){
-                answer = "You do not have a"+dictionarySymptom.symptom;
+                answer = "You do not have a "+dictionarySymptom[symptom];
             }else{
                 answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom.symptom;
             }

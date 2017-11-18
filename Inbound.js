@@ -10,8 +10,6 @@ const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:false}));
 
-
-
 var studyEnrolled = false;
 var symptomDescribed = false;
 var symptomScaled = false;
@@ -19,45 +17,8 @@ var symptomScale = "";
 var numberOfLoop = 0;
 var symptom = ""
 var dictSymptom = []; // create an empty array
-dictionarySymptom = {"1": "Headache","2":"Dizziness","3":"Nausea","4":"Fatigue","5":"Sadness"};
-dictSymptom.push({
-    key:   "1",
-    value: "Headache"
-});
-dictSymptom.push({
-    key:   "2",
-    value: "Dizziness"
-});
-dictSymptom.push({
-    key:   "3",
-    value: "Nausea"
-});
-dictSymptom.push({
-    key:   "4",
-    value: "Fatigue"
-});
-dictSymptom.push({
-    key:   "5",
-    value: "Sadness"
-});
-
-dictSeverity = [];
-dictSeverity.push({
-    key:   "1",
-    value: "mild"
-});
-dictSeverity.push({
-    key:   "2",
-    value: "mild"
-});
-dictSeverity.push({
-    key:   "3",
-    value: "moderate"
-});
-dictSeverity.push({
-    key:   "4",
-    value: "severe"
-});
+var dictionarySymptom = {"1": "Headache","2":"Dizziness","3":"Nausea","4":"Fatigue","5":"Sadness"};
+var dictionarySeverity = {"1": "mild","2":"mild","3":"moderate","4":"severe"};
 
 app.post('/sms', (request, response) => {
 
@@ -68,7 +29,7 @@ if (request.body.Body == "STARTAPP" && studyEnrolled == false){
     var started = "Welcome to the study."
     sendMessage(started,response);
     var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
-    sendMessageWithoutHeader(request.body.From,symptomQuestion,response);
+    sendMessageWithoutHeader(request.body.From,symptomQuestion);
 }
 if (studyEnrolled == true){
     if(request.body.Body == "0" || request.body.Body == "1" || request.body.Body == "2" || request.body.Body == "3" || request.body.Body == "4" || request.body.Body == "5"){
@@ -84,19 +45,19 @@ if (studyEnrolled == true){
             if (symptomScale == "0"){
                 answer = "You do not have a"+dictionarySymptom.symptom;
             }else{
-                answer = "You have a "+dictSeverity[symptomScale].toString+" "+dictionarySymptom.symptom;
+                answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom.symptom;
             }
             sendMessage(answer,response);
             numberOfLoop = numberOfLoop + 1;
-            if (numberOfLoop < 2){
+            if (numberOfLoop < 3){
                 symptomDescribed = false;
                 symptomScaled = false;
                 var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
-                sendMessageWithoutHeader(request.body.From,symptomQuestion,response);
+                sendMessageWithoutHeader(request.body.From,symptomQuestion);
             }
             else{
                 var greeting = "Thank you and see you soon";
-                sendMessageWithoutHeader(request.body.From,greeting,response);
+                sendMessageWithoutHeader(request.body.From,greeting);
             }
         }
     }
@@ -113,7 +74,7 @@ function sendMessage(messageBody,responseObject){
     responseObject.end(twiml.toString());
 }
 
-function sendMessageWithoutHeader(from,messageBody,responseObject){
+function sendMessageWithoutHeader(from,messageBody){
     console.log('Send message is being called');
     // const twiml = new MessagingResponse();
     // twiml.message(messageBody);

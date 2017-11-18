@@ -55,18 +55,25 @@ if (studyEnrolled == true){
             }else{
                 answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom[symptom];
             }
-            sendMessageWithoutHeader(request.body.From,answer);
-            numberOfLoop = numberOfLoop + 1;
-            if (numberOfLoop < 3){
-                symptomDescribed = false;
-                symptomScaled = false;
-                var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
-                sendMessage(symptomQuestion,response);
-            }
-            else{
-                var greeting = "Thank you and see you soon";
-                sendMessage(greeting,response);
-            }
+            client.messages.create({
+                body: answer,
+                to: request.body.From,  // Text this number
+                from: '+18642077505' // From a valid Twilio number
+            })
+            .then((message) =>{
+                numberOfLoop = numberOfLoop + 1;
+                if (numberOfLoop < 3){
+                    symptomDescribed = false;
+                    symptomScaled = false;
+                    var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
+                    sendMessage(symptomQuestion,response);
+                }
+                else{
+                    var greeting = "Thank you and see you soon";
+                    sendMessage(greeting,response);
+                } 
+            });
+           
         }
     }
 }

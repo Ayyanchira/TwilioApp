@@ -35,14 +35,14 @@ function sendMessage(messageBody,responseObject){
     const twiml = new MessagingResponse();
     twiml.message(messageBody);
     responseObject.writeHead(200, {'Content-Type': 'text/xml'});
-    //responseObject.end(twiml.toString());
+    responseObject.end(twiml.toString());
 }
 
 function sendMessageWithoutHeader(from,messageBody,responseObject){
     console.log('Send message is being called');
-    const twiml = new MessagingResponse();
-    twiml.message(messageBody);
-    responseObject.end(twiml.toString());
+    // const twiml = new MessagingResponse();
+    // twiml.message(messageBody);
+    // responseObject.end(twiml.toString());
     client.messages.create({
         body: messageBody,
         to: from,  // Text this number

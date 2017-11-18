@@ -9,7 +9,9 @@ app.post("/message", function (request, response) {
 });
  
 app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+  response.send({
+    name : "Akshay"
+  })
 });
  
 var listener = app.listen(3000, function () {

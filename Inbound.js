@@ -6,7 +6,8 @@ const app = express();
 
 app.post('/sms', (req, res) => {
     const twiml = new MessagingResponse();
-    console.log('fetched message by my server');
+    var msg = req.message;
+    console.log('fetched message by my server with '+msg);
     twiml.message('The Robots are coming! Head for the hills!');
 //   twiml.message('The Robots are coming! Head for the hills!');
 

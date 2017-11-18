@@ -10,8 +10,8 @@ app.post('/sms', (request, response) => {
     console.log('fetched message by my server with '+request);
     twiml.message('The Robots are coming! Head for the hills!');
 
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  res.end(twiml.toString());
+  response.writeHead(200, {'Content-Type': 'text/xml'});
+  response.end(twiml.toString());
 });
 
 http.createServer(app).listen(1337, () => {

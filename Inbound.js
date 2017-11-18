@@ -48,34 +48,42 @@ if (studyEnrolled == true){
             
         }
         else if (symptomScaled == false){
-            symptomScale = request.body.Body;
-            symptomScaled = true;
-            if (symptomScale == "0"){
-                answer = "You do not have a "+dictionarySymptom[symptom];
-            }else{
-                answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom[symptom];
-            }
-            client.messages.create({
-                body: answer,
-                to: request.body.From,  // Text this number
-                from: '+18642077505' // From a valid Twilio number
-            })
-            .then((message) =>{
-                numberOfLoop = numberOfLoop + 1;
-                symptomDescribed = false;
-                symptomScaled = false;
-                if (numberOfLoop < 3){
-                    var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
-                    sendMessage(symptomQuestion,response);
+            if(request.body.Body == "0" || request.body.Body == "1" || request.body.Body == "2" || request.body.Body == "3" || request.body.Body == "4"){
+                symptomScale = request.body.Body;
+                symptomScaled = true;
+                if (symptomScale == "0"){
+                    answer = "You do not have a "+dictionarySymptom[symptom];
+                }else{
+                    answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom[symptom];
                 }
-                else{
-                    studyEnrolled = false;
-                    var greeting = "Thank you and see you soon";
-                    sendMessage(greeting,response);
-                } 
-            });
-           
+                client.messages.create({
+                    body: answer,
+                    to: request.body.From,  // Text this number
+                    from: '+18642077505' // From a valid Twilio number
+                })
+                .then((message) =>{
+                    numberOfLoop = numberOfLoop + 1;
+                    symptomDescribed = false;
+                    symptomScaled = false;
+                    if (numberOfLoop < 3){
+                        var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
+                        sendMessage(symptomQuestion,response);
+                    }
+                    else{
+                        studyEnrolled = false;
+                        var greeting = "Thank you and see you soon";
+                        sendMessage(greeting,response);
+                    } 
+                });
+            }else{
+                resendMessage = "Please enter number between 0-4";
+                sendMessageWithoutHeader(request.body.From,resendMessage);
+            }
         }
+    }
+    else{
+        resendMessage = "Please enter number between 0-5";
+        sendMessageWithoutHeader(request.body.From,resendMessage);
     }
 }
 

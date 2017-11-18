@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.post('/sms', (request, response) => {
     const twiml = new MessagingResponse();
     // console.log(JSON.stringify(request,censor(req)));
-    console.log('fetched message by my server with '+request.body);
+    console.log('fetched message by my server with '+request.body.Body);
     twiml.message('The Robots are coming! Head for the hills!');
 
   response.writeHead(200, {'Content-Type': 'text/xml'});

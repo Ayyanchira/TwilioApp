@@ -19,7 +19,7 @@ var symptomScale = "";
 var numberOfLoop = 0;
 var symptom = ""
 var dictSymptom = []; // create an empty array
-
+dictionarySymptom = {"1": "Headache","2":"Dizziness","3":"Nausea","4":"Fatigue","5":"Sadness"};
 dictSymptom.push({
     key:   "1",
     value: "Headache"
@@ -75,16 +75,16 @@ if (studyEnrolled == true){
         if (symptomDescribed == false){
             symptom = request.body.Body
             symptomDescribed = true;
-            scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictSymptom[symptom].toString +" in the last 24 hours?"
+            scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictionarySymptom.symptom +" in the last 24 hours?"
             sendMessage(scaleMessage,response);
         }
         else if (symptomScaled == false){
             symptomScale = request.body.Body;
             symptomScaled = true;
             if (symptomScale == "0"){
-                answer = "You do not have a"+dictSymptom[symptom].toString;
+                answer = "You do not have a"+dictionarySymptom.symptom;
             }else{
-                answer = "You have a "+dictSeverity[symptomScale].toString+" "+dictSymptom[symptom].toString;
+                answer = "You have a "+dictSeverity[symptomScale].toString+" "+dictionarySymptom.symptom;
             }
             sendMessage(answer,response);
             numberOfLoop = numberOfLoop + 1;

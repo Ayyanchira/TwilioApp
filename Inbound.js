@@ -75,16 +75,16 @@ if (studyEnrolled == true){
         if (symptomDescribed == false){
             symptom = request.body.Body
             symptomDescribed = true;
-            scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictSymptom[symptom] +" in the last 24 hours?"
+            scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictSymptom[symptom].toString +" in the last 24 hours?"
             sendMessage(scaleMessage,response);
         }
         else if (symptomScaled == false){
             symptomScale = request.body.Body;
             symptomScaled = true;
             if (symptomScale == "0"){
-                answer = "You do not have a"+dictSymptom[symptom];
+                answer = "You do not have a"+dictSymptom[symptom].toString;
             }else{
-                answer = "You have a "+dictSeverity[symptomScale]+" "+dictSymptom[symptom];
+                answer = "You have a "+dictSeverity[symptomScale].toString+" "+dictSymptom[symptom].toString;
             }
             sendMessage(answer,response);
             numberOfLoop = numberOfLoop + 1;

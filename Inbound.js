@@ -55,17 +55,17 @@ if (studyEnrolled == true){
             }else{
                 answer = "You have a "+dictionarySeverity[symptomScale]+" "+dictionarySymptom[symptom];
             }
-            sendMessage(answer,response);
+            sendMessageWithoutHeader(request.body.From,answer);
             numberOfLoop = numberOfLoop + 1;
             if (numberOfLoop < 3){
                 symptomDescribed = false;
                 symptomScaled = false;
                 var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
-                sendMessageWithoutHeader(request.body.From,symptomQuestion);
+                sendMessage(symptomQuestion,response);
             }
             else{
                 var greeting = "Thank you and see you soon";
-                sendMessageWithoutHeader(request.body.From,greeting);
+                sendMessage(greeting,response);
             }
         }
     }

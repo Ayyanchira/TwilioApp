@@ -6,19 +6,20 @@ const app = express();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:false}));
-
+var studyEnrolled = false;
 app.post('/sms', (request, response) => {
-   // const twiml = new MessagingResponse();
-    // console.log(JSON.stringify(request,censor(req)));
-    console.log('fetched message by my server with '+request.body.Body);
-    //twiml.message('The Robots are coming! Head for the hills!');
 
-//   response.writeHead(200, {'Content-Type': 'text/xml'});
-//   response.end(twiml.toString());
-if (request.body.Body == "STARTAKSHAY"){
-    var started = "Welcome to health app. How are you feeling today?"
+    console.log('fetched message by my server with '+request.body.Body);
+
+if (request.body.Body == "STARTAPP" && studyEnrolled == false){
+    studyEnrolled = true;
+    var started = "Welcome to the study."
     sendMessage(started,response);
+    var symptomQuestion = "Please indicate your symptom (1)Headache, (2)Dizziness, (3)Nausea, (4)Fatigue, (5)Sadness, (0)None";
+    sendMessage(symptomQuestion,response);
 }
+
+
   
 });
 

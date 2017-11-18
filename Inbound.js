@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 var studyEnrolled = false;
 app.post('/sms', (request, response) => {
 
-    console.log('fetched message by my server with '+request.body.Body);
+    console.log('fetched message by my server with '+request.body.Body + ' and study enrolled is '+studyEnrolled);
 
 if (request.body.Body == "STARTAPP" && studyEnrolled == false){
     studyEnrolled = true;

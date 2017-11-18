@@ -28,7 +28,7 @@ function sendMessage(messageBody,responseObject){
     const twiml = new MessagingResponse();
     twiml.message(messageBody);
     responseObject.writeHead(200, {'Content-Type': 'text/xml'});
-    response.end(twiml.toString());
+    responseObject.end(twiml.toString());
 }
 http.createServer(app).listen(1337, () => {
   console.log('Express server listening on port 1337');

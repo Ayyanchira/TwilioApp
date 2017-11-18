@@ -15,7 +15,7 @@ app.post('/sms', (request, response) => {
 
 //   response.writeHead(200, {'Content-Type': 'text/xml'});
 //   response.end(twiml.toString());
-if (request.body.Body == "STARTAPP"){
+if (request.body.Body == "STARTAKSHAY"){
     var started = "Welcome to health app. How are you feeling today?"
     sendMessage(started,response);
 }
@@ -25,6 +25,7 @@ if (request.body.Body == "STARTAPP"){
 
 function sendMessage(messageBody,responseObject){
     const twiml = new MessagingResponse();
+    twiml.message(messageBody);
     responseObject.writeHead(200, {'Content-Type': 'text/xml'});
     response.end(twiml.toString());
 }

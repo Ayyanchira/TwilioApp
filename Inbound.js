@@ -24,6 +24,7 @@ if (request.body.Body == "STARTAKSHAY"){
 
 
 function sendMessage(messageBody,responseObject){
+    console.log('Send message is being called');
     const twiml = new MessagingResponse();
     twiml.message(messageBody);
     responseObject.writeHead(200, {'Content-Type': 'text/xml'});

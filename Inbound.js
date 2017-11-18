@@ -40,6 +40,7 @@ else if (studyEnrolled == true){
                 greetingMessage = "Thank you and we will check with you later.";
                 studyEnrolled = false;
                 symptomDescribed = false;
+                numberOfLoop = 0;
                 sendMessage(greetingMessage,response);
             }else{
                 scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictionarySymptom[symptom] +" in the last 24 hours?"
@@ -72,6 +73,7 @@ else if (studyEnrolled == true){
                     else{
                         studyEnrolled = false;
                         var greeting = "Thank you and see you soon";
+                        numberOfLoop = 0;
                         sendMessage(greeting,response);
                     } 
                 });

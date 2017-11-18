@@ -29,7 +29,7 @@ function sendMessage(messageBody,responseObject){
     const twiml = new MessagingResponse();
     twiml.message(messageBody);
     responseObject.writeHead(200, {'Content-Type': 'text/xml'});
-    responseObject.end(twiml.toString());
+    //responseObject.end(twiml.toString());
 }
 
 function sendMessageWithoutHeader(messageBody,responseObject){

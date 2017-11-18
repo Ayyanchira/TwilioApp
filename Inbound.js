@@ -75,7 +75,7 @@ if (studyEnrolled == true){
         if (symptomDescribed == false){
             symptom = request.body.Body
             symptomDescribed = true;
-            scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictionarySymptom.symptom +" in the last 24 hours?"
+            scaleMessage = "On a scale from 0 (none) to 4 (severe), how would you rate your "+dictionarySymptom[symptom] +" in the last 24 hours?"
             sendMessage(scaleMessage,response);
         }
         else if (symptomScaled == false){
